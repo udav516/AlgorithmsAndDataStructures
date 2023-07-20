@@ -8,13 +8,13 @@ public class Task3 {
      * Сортировка вставками
      * @param array неотсортированный массив
      */
-    public static void insertSort(int[] array) {
+    public static void bubbleSort(int[] array){
         for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[i] > array[j]) {
-                    int temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+            for(int j = 0; j < array.length - i - 1; j++) {
+                if(array[j + 1] < array[j]) {
+                    int swap = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = swap;
                 }
             }
         }
@@ -64,14 +64,14 @@ public class Task3 {
             }
             int[] array2 = array;
             Date startDate = new Date();
-            insertSort(array);
+            bubbleSort(array);
             Date endDate = new Date();
-            long insertSort = endDate.getTime() - startDate.getTime();
+            long bubbleSort = endDate.getTime() - startDate.getTime();
             startDate = new Date();
             quickSort(array2, 0, array.length - 1);
             endDate = new Date();
             long quickSort = endDate.getTime() - startDate.getTime();
-            System.out.println("i: " + i + ", insertSort duration: " + insertSort + ", quickSort duration: " + quickSort);
+            System.out.println("i: " + i + ", insertSort duration: " + bubbleSort + ", quickSort duration: " + quickSort);
         }
     }
 }
