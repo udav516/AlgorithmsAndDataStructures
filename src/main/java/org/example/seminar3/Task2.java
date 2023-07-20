@@ -11,7 +11,6 @@ public class Task2 {
         private int value;
     }
 
-    // [Node <=> NodeTest]
     public void addFirst(int value) {
         Node node = new Node();
         node.value = value;
