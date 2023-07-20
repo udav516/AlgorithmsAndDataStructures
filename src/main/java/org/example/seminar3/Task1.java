@@ -20,4 +20,15 @@ public class Task1 {
             head = head.next;
         }
     }
+
+    public boolean contains(int value) {
+        Node node = head;
+        while (node != null) {
+            if (node.value == value) {
+                return true;
+            }
+            node = node.next;
+        }
+        return false;
+    }
 }
