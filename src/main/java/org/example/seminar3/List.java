@@ -96,6 +96,29 @@ public class List {
         }
     }
 
+    /**
+     * Добавление элемента в начало стека
+     * @param value добавляемый элемент
+     */
+    public void push (int value) {
+        Node node = new Node();
+        node.value =value;
+        node.next = head;
+        head = node;
+    }
+
+    /**
+     * Извлечение последнего элемента стека
+     * @return последний элемент
+     */
+    public  Integer pop(){
+        Integer result = null;
+        if (head != null){
+            result = head.value;
+            head = head.next;
+        }
+        return result;
+    }
 //    /**
 //     * Проверка на наличие пустого односвязного списка
 //     */
