@@ -6,6 +6,7 @@ public class List {
 
     /**
      * Добавление элемента в конец двусвязного списока
+     *
      * @param value добавляемый элемент
      */
     public void add(int value) {
@@ -23,6 +24,7 @@ public class List {
 
     /**
      * Добавление элемента с узлом в двусвязный список
+     *
      * @param value добавляемый элемент
      * @param node  добавляемый узел
      */
@@ -42,6 +44,7 @@ public class List {
 
     /**
      * Удаление узла в двусвязный список
+     *
      * @param node удаляемый узел
      */
     private void delete(Node node) {
@@ -62,6 +65,7 @@ public class List {
 
     /**
      * Поиск элемента в двусвязном списке
+     *
      * @param value искомый элемента
      * @return найденное значение
      */
@@ -100,20 +104,35 @@ public class List {
      * Добавление элемента в начало стека
      * @param value добавляемый элемент
      */
-    public void push (int value) {
+    public void push(int value) {
         Node node = new Node();
-        node.value =value;
+        node.value = value;
         node.next = head;
+        head.previous = node;
         head = node;
+    }
+
+    /**
+     * Извлечение последнего элемента очереди
+     * @return последний элемент
+     */
+    public Integer peek() {
+        Integer result = null;
+        if (tail != null) {
+            result = tail.value;
+            tail.previous.next = null;
+            tail = tail.previous;
+        }
+        return result;
     }
 
     /**
      * Извлечение последнего элемента стека
      * @return последний элемент
      */
-    public  Integer pop(){
+    public Integer pop() {
         Integer result = null;
-        if (head != null){
+        if (head != null) {
             result = head.value;
             head = head.next;
         }
