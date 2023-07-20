@@ -10,6 +10,26 @@ public class BubbleSortList {
         private int value;
     }
 
+    public void reverse() {
+        if (head == null) {
+            return;
+        }
+
+        Node temp = null;
+        Node current = head;
+
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+
+        if (temp != null) {
+            head = temp.prev;
+        }
+    }
+
     public void sort() {
         boolean needSort;
         do {
