@@ -2,10 +2,16 @@ package org.example.seminar4;
 
 public class HashTable<K, V> {
     private final int SIZE = 10;
+    private int length = 0;
+    private double loadFactor = 0.75;
     List[] list;
 
     public HashTable(int size) {
         list = (List[]) new Object[size];
+    }
+
+    public HashTable() {
+        list = (List[]) new Object[SIZE];
     }
 
     public int calculateBucketIndex(K key) {
@@ -18,6 +24,49 @@ public class HashTable<K, V> {
             return list[index].findValue(key);
         }
         return null;
+    }
+
+    public boolean addItem(K key, V value) {
+        if (list.length > length * loadFactor) {
+            reCalculate();
+        }
+        Entity newEntity = new Entity();
+        newEntity.key = key;
+        newEntity.value = value;
+        int index = calculateBucketIndex(key);
+        List itemList = list[index];
+        if (itemList == null) {
+            itemList = new List();
+            list[index] = itemList;
+        }
+        boolean flag = list[index].add(newEntity);
+        if (flag) {
+            length++;
+        }
+        return flag;
+    }
+
+    public boolean removeItem(K key) {
+        int index = calculateBucketIndex(key);
+        boolean flag = list[index].remove(key);
+        if (flag) {
+            length--;
+        }
+        return flag;
+    }
+
+    public void reCalculate() {
+        List[] oldList = list;
+        list = (List[]) new Object[oldList.length * 2];
+        for (int i = 0; i < oldList.length; i++) {
+            List itemList = oldList[i];
+            List.Node node = itemList.head;
+            while (node != null) {
+                addItem(node.data.key, node.data.value);
+                node = node.next;
+            }
+            oldList[i] = null;
+        }
     }
 
     class Entity {
