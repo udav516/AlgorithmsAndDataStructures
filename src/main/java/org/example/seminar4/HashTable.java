@@ -43,6 +43,40 @@ public class HashTable<K, V> {
             }
             return null;
         }
+
+        public boolean add(Entity item) {
+            Node newNode = new Node();
+            Node node = head;
+            while (node != null) {
+                if (node.data.key.equals(item.key)) {
+                    return false;
+                }
+                if (node.next == null) break;
+                node = node.next;
+            }
+            newNode.data = item;
+            node.next = newNode;
+            return true;
+        }
+
+        public boolean remove(K key) {
+            Node node = head;
+            Node previous = head;
+            if (head != null) {
+                if (head.data.key.equals(key)) {
+                    head = head.next;
+                    return true;
+                }
+            }
+            while (node != null) {
+                if (node.data.key.equals(key)) {
+                    previous.next = node.next;
+                }
+                previous = node;
+                node = node.next;
+            }
+            return false;
+        }
     }
 
 }
