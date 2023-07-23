@@ -8,8 +8,16 @@ public class HashTable<K, V> {
         list = (List[]) new Object[size];
     }
 
-    public int calculateBacketIndex(K key) {
+    public int calculateBucketIndex(K key) {
         return key.hashCode() % list.length;
+    }
+
+    public V findValueInList(K key) {
+        int index = calculateBucketIndex(key);
+        if (list[index] != null) {
+            return list[index].findValue(key);
+        }
+        return null;
     }
 
     class Entity {
@@ -21,8 +29,19 @@ public class HashTable<K, V> {
         private Node head;
 
         class Node {
-            private Entity value;
+            private Entity data;
             private Node next;
+        }
+
+        public V findValue(K key) {
+            Node node = head;
+            while (node != null) {
+                if (node.data.key.equals(key)) {
+                    return node.data.value;
+                }
+                node = node.next;
+            }
+            return null;
         }
     }
 
